@@ -1,0 +1,204 @@
+@import 'bootstrap/scss/bootstrap';
+
+#root {
+  width: 100%;
+  height: 100vh;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.b-example-divider {
+  width: 100%;
+  height: 3rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: solid rgba(0, 0, 0, 0.15);
+  border-width: 1px 0;
+  box-shadow:
+    inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+    inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+}
+
+.b-example-vr {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 100vh;
+}
+
+.bi {
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.btn-bd-primary {
+  --bd-violet-bg: #712cf9;
+  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+  --bs-btn-font-weight: 600;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--bd-violet-bg);
+  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: #6528e0;
+  --bs-btn-hover-border-color: #6528e0;
+  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #5a23c8;
+  --bs-btn-active-border-color: #5a23c8;
+}
+
+.bd-mode-toggle {
+  z-index: 1500;
+}
+
+.bd-mode-toggle .dropdown-menu .active .bi {
+  display: block !important;
+}
+.closed-challenge-card,
+.opened-challenge-card {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin-left: 20px;
+  position: relative;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.closed-challenge-card {
+  background-image: url('../public/card_back.jpeg');
+  background-size: cover;
+}
+
+.opened-challenge-card {
+  background-size: cover;
+}
+
+.closed-challenge-card::before {
+  content: '';
+  position: absolute;
+  inset: 0px;
+  background: conic-gradient(
+    from 90deg at 50% 50%,
+    #ffd700,
+    #000000,
+    #ffd700,
+    #000000,
+    #ffd700,
+    #000000,
+    #ffd700,
+    #000000,
+    #ffd700
+  );
+  filter: blur(10px);
+  transform: translate3d(0px, 22px, -1px);
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0; /* Oculto inicialmente */
+  transition: opacity 0.3s ease-in-out; /* Transición de opacidad */
+}
+
+.closed-challenge-card:hover::before {
+  opacity: 1; /* Muestra el gradiente al hacer hover */
+}
+
+.animating-background {
+  background: rgba(0, 0, 0, 0.2); /* Cambia el color y la opacidad según sea necesario */
+  z-index: 1000; /* Asegúrate de que esté sobre otros contenidos */
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.image-card {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 5px;
+}
+.image-modal {
+  width: 40%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.card-title {
+  margin: 0;
+}
+
+/* Estilos para el modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1); /* Fondo semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Z-index alto para estar sobre otros elementos */
+}
+
+.modal-content {
+  background-color: #fff;
+  width: 400px;
+  height: 400px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-border-demos {
+  border: 2px solid blue;
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+}
+
+.modal-content button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
+}
