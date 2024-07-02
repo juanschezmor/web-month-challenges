@@ -1,25 +1,20 @@
 import React, { useState } from 'react';
-import Modal from './Modal';
+import CardModal from './CardModal';
 import beeCard from '../utils/BeeCard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playSound, stopSound } from '../utils/sound';
 import { useGlobalContext } from '../context/Context';
 import { changeChallengeOpen } from '../Firebase/changeChallengeOpen';
-import HypeComponent from './Animation'; // Importa tu HypeComponent aquí
-import { set } from 'firebase/database';
 
 function Card({ challenge, i }) {
-  const { isAnimating, setIsAnimating, modalOpened, setModalOpened } = useGlobalContext();
-  const [challengeOpened, setChallengeOpened] = useState(challenge.isOpened);
+  const { modalOpened, setModalOpened } = useGlobalContext();
+  const [isOpened, setIsOpened] = useState(challenge.isOpened);
 
-  const changeChallengeOpened = () => {
-    // Change the firebase document
-    changeChallengeOpen(challenge.id);
-  };
+  const cardChallenge = challenge;
 
   const openModal = () => {
-    changeChallengeOpened();
-    setChallengeOpened(true);
+    // Cambiar el estado local y también en Firebase si es necesario
+    setIsOpened(true);
     setModalOpened(true);
   };
 
@@ -28,7 +23,7 @@ function Card({ challenge, i }) {
   };
 
   const handleHoverStart = () => {
-    playSound('../../public/bee-sound.wav');
+    //playSound('../../public/bee-sound.wav');
   };
 
   const handleHoverStop = () => {
@@ -38,14 +33,19 @@ function Card({ challenge, i }) {
   return (
     <>
       <AnimatePresence>
-        {challengeOpened ? (
+        {isOpened ? (
           <motion.div
             key="opened-card"
             className="opened-challenge-card"
             style={{ backgroundImage: `url(${beeCard(challenge.type)})` }}
             onClick={openModal}
           >
-            <div className="w-100 h-100 d-flex justify-content-center align-items-center"></div>
+            <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+              <p>
+                {challenge.type}
+                {challenge.challenge}
+              </p>
+            </div>
           </motion.div>
         ) : (
           <motion.div
@@ -63,8 +63,8 @@ function Card({ challenge, i }) {
         )}
       </AnimatePresence>
 
-      {/* Mostrar el Modal cuando modalOpened es true */}
-      {modalOpened && <Modal closeModal={closeModal} type={challenge.type} challenge={challenge.challenge} />}
+      {/* Mostrar el Modal cuando modalOpened es true y pasar el challenge correcto */}
+      {modalOpened && <CardModal closeModal={closeModal} challenge={cardChallenge} />}
     </>
   );
 }

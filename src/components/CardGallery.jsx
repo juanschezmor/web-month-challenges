@@ -1,9 +1,10 @@
 import React from 'react';
 import Card from './Card';
-import { useChallenges } from '../services/challengesService';
+
+import { useGlobalContext } from '../context/Context';
 
 function CardGallery() {
-  const { challenges, loading } = useChallenges();
+  const { challenges, loading } = useGlobalContext();
 
   if (loading) {
     return <p>Cargando desafíos...</p>;
@@ -13,7 +14,7 @@ function CardGallery() {
     return <p>No hay desafíos disponibles.</p>;
   }
   return (
-    <div className="w-100 h-100 container d-flex flex-wrap ">
+    <div className="w-100 h-100 card-gallery ">
       {challenges.map((challenge, i) => (
         <Card key={challenge.id} challenge={challenge} i={i} />
       ))}

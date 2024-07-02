@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import addChallenge from '../Firebase/addChallenge';
 
 function AddChallengePage() {
-  const challengeTypes = ['demos', 'calling-activity', 'country-challenge'];
+  const challengeTypes = ['demos', 'calling-activity', 'country-challenge', 'free_points'];
   const [type, setType] = useState('');
   const [challenge, setChallenge] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const challengeData = { type, challenge, isOpened: false };
+      const challengeData = { type, challenge, isOpened: false, completed: false };
       console.log('Challenge data: ', challengeData);
 
       await addChallenge(challengeData);
@@ -47,7 +47,6 @@ function AddChallengePage() {
             id="challenge"
             value={challenge}
             onChange={(e) => setChallenge(e.target.value)}
-            required
           ></textarea>
         </div>
         <button type="submit" className="btn btn-primary">
