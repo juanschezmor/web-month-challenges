@@ -1,7 +1,7 @@
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useGlobalContext } from '../context/Context';
-import { updateMaxPoints } from '../Firebase/updatePoints';
+
 const dropIn = {
   hidden: {
     y: '-100vh',
@@ -11,7 +11,7 @@ const dropIn = {
     y: '0',
     opacity: 1,
     transition: {
-      duration: 2, // Duración ajustada para la animación del modal
+      duration: 2,
       type: 'spring',
       damping: 25,
       stiffness: 500,
@@ -21,13 +21,13 @@ const dropIn = {
     y: '100vh',
     opacity: 0,
     transition: {
-      duration: 2, // Duración ajustada para la animación de salida del modal
+      duration: 2,
     },
   },
 };
 
-const Modal = ({ closeModal, type, challenge }) => {
-  const { setMaxPoints } = useGlobalContext();
+const Modal = ({ closeModal }) => {
+  const { setMaxPoints, resetChallenges, fetchData } = useGlobalContext();
   const [inputMaxPoints, setInputMaxPoints] = useState(20);
 
   const handleInputChange = (e) => {
@@ -37,9 +37,10 @@ const Modal = ({ closeModal, type, challenge }) => {
     }
   };
 
-  const handleSubmit = () => {
-    setMaxPoints(inputMaxPoints);
-    updateMaxPoints(inputMaxPoints);
+  const handleSubmit = async () => {
+    await setMaxPoints(inputMaxPoints);
+    await resetChallenges();
+    await fetchData();
     closeModal();
   };
 
@@ -47,18 +48,23 @@ const Modal = ({ closeModal, type, challenge }) => {
     <div className="modal">
       <motion.div className="modal-content" variants={dropIn} initial="hidden" animate="visible" exit="exit">
         <button type="button" className="btn-close" aria-label="Close" onClick={closeModal} />
-        <div>
-          <label htmlFor="inputMaxPointsInput">Número máximo de puntos:</label>
-          <input
-            type="number"
-            id="inputMaxPointsInput"
-            name="inputMaxPointsInput"
-            onChange={handleInputChange}
-            min={0}
-            step={1}
-          />
+        <div className="modal-body">
+          <div className="form-group">
+            <label htmlFor="inputMaxPointsInput">Number of days:</label>
+            <input
+              type="number"
+              id="inputMaxPointsInput"
+              name="inputMaxPointsInput"
+              onChange={handleInputChange}
+              min={0}
+              step={1}
+              className="form-control"
+            />
+          </div>
+          <button onClick={handleSubmit} className="generic-button">
+            Start new month!
+          </button>
         </div>
-        <button onClick={handleSubmit}>Set Max Points</button>
       </motion.div>
     </div>
   );

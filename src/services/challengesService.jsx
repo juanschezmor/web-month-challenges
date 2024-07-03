@@ -1,26 +1,23 @@
-// services/challengesService.js
-import { useEffect, useState } from 'react';
-import { onSnapshot, collection } from 'firebase/firestore';
-import db from '../Firebase/FirebaseConfig';
+// src/services/challengeService.js
 
-export const useChallenges = () => {
-  const [challenges, setChallenges] = useState([]);
-  const [loading, setLoading] = useState(true);
+export const resetChallenges = (challenges) => {
+  return challenges.map((challenge) => {
+    return {
+      ...challenge,
+      isOpened: false,
+      completed: 2,
+    };
+  });
+};
+export const shuffleChallenges = (challenges) => {
+  let newArray = challenges.slice();
+  newArray.sort(() => Math.random() - 0.5);
+  return newArray;
+};
 
-  useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'challenges'), {
-      next: (snapshot) => {
-        setLoading(false);
-        setChallenges(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      },
-      error: (error) => {
-        console.error('Error fetching challenges:', error);
-        setLoading(false); // Asegurar que se desactive el estado de carga en caso de error
-      },
-    });
+export const resetAndShuffleChallenges = (challenges) => {
+  const resettedChallenges = resetChallenges(challenges);
+  const resettedAndShuffledChallenges = shuffleChallenges(resettedChallenges);
 
-    return () => unsubscribe();
-  }, []);
-
-  return { challenges, loading };
+  return resettedAndShuffledChallenges;
 };

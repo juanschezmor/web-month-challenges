@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import PointsModal from './PointsModal';
 import { useGlobalContext } from '../context/Context';
 import ProgressBar from './ProgressBar';
+import hiveLogo from '../assets/logo.png';
 function Header() {
-  const { points } = useGlobalContext();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [maxPoints, setMaxPoints] = useState(20); // Estado para el número máximo de puntos
 
   const navigateTo = (path) => {
     navigate(path);
@@ -21,31 +20,25 @@ function Header() {
     setIsModalOpen(false);
   };
 
-  const handleSetMaxPoints = () => {
+  const handleButton = () => {
     openModal(); // Abre el modal al hacer clic en "Set Max Points"
   };
 
   return (
     <nav className="navbar navbar-light bg-light d-flex justify-content-between px-3">
       <a className="navbar-brand button" onClick={() => navigateTo('/')}>
-        Hive
+        <img className="img-logo" src={hiveLogo} alt="Hive Logo" />
       </a>
-      <a className="generic-button" onClick={handleSetMaxPoints}>
-        Set Max Points
+      <a className="generic-button" onClick={handleButton}>
+        Start Month
       </a>
-      <ProgressBar points={points} />
+      <ProgressBar />
+
       <button className="generic-button" onClick={() => navigateTo('add-challenge')}>
         Add Challenge
       </button>
 
-      {isModalOpen && (
-        <PointsModal
-          closeModal={closeModal}
-          type="setMaxPoints"
-          challenge={null}
-          setPoints={setMaxPoints} // Pasa la función para establecer los puntos máximos al Modal
-        />
-      )}
+      {isModalOpen && <PointsModal closeModal={closeModal} type="setMaxPoints" />}
     </nav>
   );
 }

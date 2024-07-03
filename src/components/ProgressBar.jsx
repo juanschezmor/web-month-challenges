@@ -1,8 +1,7 @@
 import { useGlobalContext } from '../context/Context';
 
-const ProgressBar = (props) => {
-  const { points } = props;
-  const { maxPoints } = useGlobalContext();
+const ProgressBar = () => {
+  const { points, maxPoints } = useGlobalContext();
   const completed = Math.round((points / maxPoints) * 100);
 
   const containerStyles = {
