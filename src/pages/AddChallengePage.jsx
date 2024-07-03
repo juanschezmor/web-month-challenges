@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import addChallenge from '../Firebase/addChallenge';
+import { useGlobalContext } from '../context/Context';
+import { CHALLENGE_TYPES } from '../utils/constants';
 
 function AddChallengePage() {
-  const challengeTypes = ['demos', 'calling-activity', 'country-challenge'];
   const [type, setType] = useState('');
   const [challenge, setChallenge] = useState('');
+  const { addChallenge, num_challenges } = useGlobalContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const challengeData = { type, challenge, isOpened: false };
+      console.log(num_challenges);
+      const challengeData = { type, challenge, isOpened: false, completed: 2, order: num_challenges };
       console.log('Challenge data: ', challengeData);
 
       await addChallenge(challengeData);
@@ -31,7 +33,7 @@ function AddChallengePage() {
           </label>
           <select className="form-select" id="type" value={type} onChange={(e) => setType(e.target.value)} required>
             <option value="">Select a type</option>
-            {challengeTypes.map((typeOption) => (
+            {CHALLENGE_TYPES.map((typeOption) => (
               <option key={typeOption} value={typeOption}>
                 {typeOption}
               </option>
@@ -47,10 +49,9 @@ function AddChallengePage() {
             id="challenge"
             value={challenge}
             onChange={(e) => setChallenge(e.target.value)}
-            required
           ></textarea>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="generic-button">
           Add Challenge
         </button>
       </form>
