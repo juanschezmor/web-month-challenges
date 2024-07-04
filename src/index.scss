@@ -123,6 +123,18 @@
   width: 25px;
   height: 25px;
 }
+.rewards-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+.rewards-icon:hover {
+  transform: scale(1.1);
+}
+.bee-icon {
+  width: 25px;
+  height: 25px;
+}
 .generic-button {
   display: inline-block;
   background-color: #f7d51d;

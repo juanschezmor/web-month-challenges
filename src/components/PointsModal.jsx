@@ -26,7 +26,7 @@ const dropIn = {
   },
 };
 
-const Modal = ({ closeModal }) => {
+const PointsModal = ({ closeModal }) => {
   const { setMaxPoints, resetChallenges, fetchData } = useGlobalContext();
   const [inputMaxPoints, setInputMaxPoints] = useState(20);
 
@@ -70,4 +70,4 @@ const Modal = ({ closeModal }) => {
   );
 };
 
-export default Modal;
+export default PointsModal;
