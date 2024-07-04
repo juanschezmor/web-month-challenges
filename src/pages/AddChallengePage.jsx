@@ -25,36 +25,38 @@ function AddChallengePage() {
 
   return (
     <div className="container mt-4">
-      <h2>Add Challenge</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="type" className="form-label">
-            Type
-          </label>
-          <select className="form-select" id="type" value={type} onChange={(e) => setType(e.target.value)} required>
-            <option value="">Select a type</option>
-            {CHALLENGE_TYPES.map((typeOption) => (
-              <option key={typeOption} value={typeOption}>
-                {typeOption}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="challenge" className="form-label">
-            Challenge
-          </label>
-          <textarea
-            className="form-control"
-            id="challenge"
-            value={challenge}
-            onChange={(e) => setChallenge(e.target.value)}
-          ></textarea>
-        </div>
-        <button type="submit" className="generic-button">
-          Add Challenge
-        </button>
-      </form>
+      <div className="row add-challenge-container">
+        <h2>Add Challenge</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="type" className="form-label">
+              Type
+            </label>
+            <select className="form-select" id="type" value={type} onChange={(e) => setType(e.target.value)} required>
+              <option value="">Select a type</option>
+              {CHALLENGE_TYPES.map((typeOption) => (
+                <option key={typeOption} value={typeOption}>
+                  {typeOption}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="challenge" className="form-label">
+              Challenge
+            </label>
+            <textarea
+              className="form-control"
+              id="challenge"
+              value={challenge}
+              onChange={(e) => setChallenge(e.target.value)}
+            ></textarea>
+          </div>
+          <button type="submit" className="generic-button">
+            Add Challenge
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -101,8 +101,8 @@
   font-weight: bold;
 }
 .img-logo {
-  width: 200px;
-  height: 55px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
 }
 .generic-button {
@@ -130,6 +130,18 @@
 .generic-button:active {
   transform: translateY(1px);
 }
+.rewards-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+.rewards-icon:hover {
+  transform: scale(1.1);
+}
+.bee-icon {
+  width: 25px;
+  height: 25px;
+}
 .card-gallery {
   display: flex;
   flex-wrap: wrap;
@@ -154,7 +166,7 @@
 }
 
 .closed-challenge-card {
-  background-image: url('../public/card_back.jpeg');
+  background-image: url('../public/card-back.jpg');
   background-size: cover;
 }
 
@@ -162,8 +174,7 @@
   background-size: cover;
 }
 
-.closed-challenge-card::before,
-.not-completed-challenge-card::before {
+.closed-challenge-card::before {
   content: '';
   position: absolute;
   inset: 0px;
@@ -187,9 +198,35 @@
   transition: opacity 0.3s ease-in-out; /* Transición de opacidad */
 }
 
-.closed-challenge-card:hover::before,
-.not-completed-challenge-card:hover::before {
+.closed-challenge-card:hover::before {
   opacity: 1; /* Muestra el gradiente al hacer hover */
+}
+.not-completed-challenge-card {
+  position: relative; /* Asegúrate de que el elemento padre tenga posición relativa */
+  z-index: 0; /* Asegúrate de que el elemento principal tenga un nivel de apilamiento menor */
+}
+
+.not-completed-challenge-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from 90deg at 50% 50%,
+    #ffd700,
+    #000000,
+    #ffd700,
+    #000000,
+    #ffd700,
+    #000000,
+    #ffd700,
+    #000000,
+    #ffd700
+  );
+  filter: blur(10px);
+  transform: translate3d(0, 22px, -1px);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1; /* Coloca el pseudo-elemento detrás del contenido */
 }
 
 .animating-background {
@@ -281,4 +318,11 @@
   text-align: center;
   margin: 10px;
   gap: 20px;
+}
+.add-challenge-container {
+  width: 50%;
+  height: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 20px;
 }

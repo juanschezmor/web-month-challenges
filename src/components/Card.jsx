@@ -31,7 +31,7 @@ function Card({ challenge, i }) {
   };
 
   const handleHoverStart = () => {
-    //playSound('../../public/card-hover.wav');
+    //playSound('../../public/card-sound1.mp3');
   };
 
   const handleHoverStop = () => {
