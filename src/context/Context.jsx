@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   fetchChallenges,
   addChallenge,
+  deleteChallenge,
   updateChallengeOpened,
   updateChallengeCompleted,
   resetChallengesInFirestore,
@@ -24,6 +25,7 @@ const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [numChallenges, setNumChallenges] = useState(0);
   const [isExploding, setIsExploding] = useState(false);
+  const [totalChallenges, setTotalChallenges] = useState(0);
 
   /* FETCH DATA */
   const fetchData = async () => {
@@ -37,31 +39,47 @@ const ContextProvider = ({ children }) => {
     setMaxPoints(fetchedMaxPoints);
     setChallenges(fetchedChallenges);
     setLoading(false);
+    setTotalChallenges(fetchedChallenges.length);
   };
 
   useEffect(() => {
     fetchData();
+    setTotalChallenges(challenges.length);
   }, []);
 
   useEffect(() => {
+    console.log('Challenges changed');
     if (challenges.length > 0 && maxPoints > 0 && maxPoints <= challenges.length) {
       const updatedShownChallenges = challenges.slice(0, maxPoints);
       setShownChallenges(updatedShownChallenges);
       setNumChallenges(updatedShownChallenges.length);
+      setTotalChallenges(challenges.length);
     } else {
       setShownChallenges(challenges);
       setNumChallenges(challenges.length);
+      setTotalChallenges(challenges.length);
     }
   }, [challenges, maxPoints]);
 
   /* CHALLENGES HANDLERS */
   const handleAddChallenge = async (challengeData) => {
     try {
-      await addChallenge(challengeData);
+      const challengeId = await addChallenge(challengeData);
+      console.log('Challenge added with ID:', challengeId);
+      challengeData = { ...challengeData, id: challengeId };
       const updatedChallenges = [...challenges, challengeData];
       setChallenges(updatedChallenges);
     } catch (error) {
       console.error('Error adding challenge:', error);
+    }
+  };
+  const handleDeleteChallenge = async (challengeId) => {
+    try {
+      await deleteChallenge(challengeId);
+      const updatedChallenges = challenges.filter((challenge) => challenge.id !== challengeId);
+      setChallenges(updatedChallenges);
+    } catch (error) {
+      console.error('Error deleting challenge:', error);
     }
   };
 
@@ -130,16 +148,19 @@ const ContextProvider = ({ children }) => {
         setPoints: handleUpdatePoints,
         maxPoints,
         setMaxPoints: handleUpdateMaxPoints,
-        challenges: shownChallenges,
+        challenges,
+        shownChallenges,
         numChallenges,
         loading,
         addChallenge: handleAddChallenge,
+        deleteChallenge: handleDeleteChallenge,
         resetChallenges: handleResetAndShuffleChallenges,
         updateChallengeOpened: handleUpdateChallengeOpened,
         updateChallengeCompleted: handleUpdateChallengeCompleted,
         fetchData,
         isExploding,
         setIsExploding: handleSetExploding,
+        totalChallenges,
       }}
     >
       {children}

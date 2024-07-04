@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import PointsModal from './PointsModal';
 import { useGlobalContext } from '../context/Context';
 import ProgressBar from './ProgressBar';
-import hiveLogo from '../assets/logo.png';
+import hiveLogo from '../../public/hive-logo.png';
 function Header() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,16 +26,17 @@ function Header() {
 
   return (
     <nav className="navbar navbar-light bg-light d-flex justify-content-between px-3">
-      <a className="navbar-brand button" onClick={() => navigateTo('/')}>
-        <img className="img-logo" src={hiveLogo} alt="Hive Logo" />
-      </a>
+      <span className="header-logo" onClick={() => navigateTo('/')}>
+        <img className="hive-logo" src={hiveLogo} alt="Hive Logo" />
+        <p>Hive</p>
+      </span>
       <a className="generic-button" onClick={handleButton}>
         Start Month
       </a>
       <ProgressBar />
 
-      <button className="generic-button" onClick={() => navigateTo('add-challenge')}>
-        Add Challenge
+      <button className="generic-button" onClick={() => navigateTo('challenges')}>
+        Challenges
       </button>
 
       {isModalOpen && <PointsModal closeModal={closeModal} type="setMaxPoints" />}

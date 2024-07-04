@@ -1,5 +1,5 @@
 // src/services/firebaseService.js
-import { collection, getDocs, addDoc, updateDoc, doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, updateDoc, doc, getDoc, deleteDoc } from 'firebase/firestore';
 import db from '../../firebase';
 
 /* CHALLENGES */
@@ -16,6 +16,16 @@ export const addChallenge = async (challengeData) => {
     return docRef.id;
   } catch (error) {
     console.error('Error adding document: ', error);
+    throw error;
+  }
+};
+
+export const deleteChallenge = async (challengeId) => {
+  try {
+    await deleteDoc(doc(db, 'challenges', challengeId));
+    console.log('Document deleted successfully');
+  } catch (error) {
+    console.error('Error deleting document:', error);
     throw error;
   }
 };

@@ -5,15 +5,15 @@ import { AnimatePresence, motion } from 'framer-motion';
 import ConfettiExplosion from 'react-confetti-explosion';
 
 function CardGallery() {
-  const { challenges, loading, isExploding, setIsExploding } = useGlobalContext();
+  const { shownChallenges, loading, isExploding, setIsExploding } = useGlobalContext();
   const [sortedChallenges, setSortedChallenges] = useState([]);
 
   useEffect(() => {
-    if (challenges && challenges.length > 0 && Array.isArray(challenges)) {
-      const sorted = [...challenges].sort((a, b) => a.order - b.order);
+    if (shownChallenges && shownChallenges.length > 0 && Array.isArray(shownChallenges)) {
+      const sorted = [...shownChallenges].sort((a, b) => a.order - b.order);
       setSortedChallenges(sorted);
     }
-  }, [challenges]);
+  }, [shownChallenges]);
 
   if (loading) {
     return <p className="text">Loading...</p>;
