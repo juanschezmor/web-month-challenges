@@ -7,6 +7,7 @@ import hiveLogo from '../../public/hive-logo.png';
 import chestIcon from '../assets/chest.png';
 import chestOpenedIcon from '../assets/chest-opened.png';
 import RewardsModal from './RewardsModal';
+import { playSound } from '../utils/sound';
 function Header() {
   const navigate = useNavigate();
 
@@ -29,9 +30,12 @@ function Header() {
     openPointsModal();
   };
   const handleOpenRewards = () => {
+    console.log('Opening points modal');
+    playSound('../../public/chest-open.mp3');
     setRewardsModalOpened(true);
   };
   const handleCloseRewards = () => {
+    playSound('../../public/chest-close.mp3');
     setRewardsModalOpened(false);
   };
 
