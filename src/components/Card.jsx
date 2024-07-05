@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CardModal from './CardModal';
 import beeCard from '../utils/BeeCard';
 import { motion, AnimatePresence } from 'framer-motion';
-import { stopSound } from '../utils/sound';
+import { playSound, stopSound } from '../utils/sound';
 import { useGlobalContext } from '../context/Context';
 
 function Card({ challenge, i }) {
@@ -31,7 +31,7 @@ function Card({ challenge, i }) {
   };
 
   const handleHoverStart = () => {
-    //playSound('../../public/card-hover.wav');
+    playSound('../../public/card-sound.mp3');
   };
 
   const handleHoverStop = () => {
