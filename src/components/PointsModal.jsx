@@ -1,30 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useGlobalContext } from '../context/Context';
-
-const dropIn = {
-  hidden: {
-    y: '-100vh',
-    opacity: 0,
-  },
-  visible: {
-    y: '0',
-    opacity: 1,
-    transition: {
-      duration: 2,
-      type: 'spring',
-      damping: 25,
-      stiffness: 500,
-    },
-  },
-  exit: {
-    y: '100vh',
-    opacity: 0,
-    transition: {
-      duration: 2,
-    },
-  },
-};
+import { dropIn } from '../utils/ModalDropIn.js';
 
 const PointsModal = ({ closeModal }) => {
   const { setMaxPoints, resetChallenges, fetchData } = useGlobalContext();

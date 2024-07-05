@@ -12,6 +12,9 @@ import {
   updateMaxPointsInFirestore,
   fetchPoints,
   updatePointsInFirestore,
+  fetchRewards,
+  addReward,
+  deleteReward,
 } from '../services/firebaseService';
 import ConfettiExplosion from 'react-confetti-explosion';
 
@@ -26,20 +29,22 @@ const ContextProvider = ({ children }) => {
   const [numChallenges, setNumChallenges] = useState(0);
   const [isExploding, setIsExploding] = useState(false);
   const [totalChallenges, setTotalChallenges] = useState(0);
-
+  const [rewards, setRewards] = useState([]);
   /* FETCH DATA */
   const fetchData = async () => {
     setLoading(true);
-    const [fetchedPoints, fetchedMaxPoints, fetchedChallenges] = await Promise.all([
+    const [fetchedPoints, fetchedMaxPoints, fetchedChallenges, fetchedRewards] = await Promise.all([
       fetchPoints(),
       fetchMaxPoints(),
       fetchChallenges(),
+      fetchRewards(),
     ]);
     setPoints(fetchedPoints);
     setMaxPoints(fetchedMaxPoints);
     setChallenges(fetchedChallenges);
     setLoading(false);
     setTotalChallenges(fetchedChallenges.length);
+    setRewards(fetchedRewards);
   };
 
   useEffect(() => {
@@ -141,6 +146,32 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     console.log('isExploding:', isExploding);
   }, [isExploding]);
+
+  /* REWARDS HANDLERS */
+
+  const handleAddReward = async (rewardData) => {
+    try {
+      const rewardId = await addReward(rewardData);
+      console.log('Reward added with ID:', rewardId);
+      rewardData = { ...rewardData, id: rewardId };
+      const updatedRewards = [...rewards, rewardData];
+      setRewards(updatedRewards);
+    } catch (error) {
+      console.error('Error adding reward:', error);
+    }
+  };
+  console.log('Rewards:', rewards);
+
+  const handleDeleteReward = async (rewardId) => {
+    try {
+      await deleteReward(rewardId);
+      const updatedRewards = rewards.filter((reward) => reward.id !== rewardId);
+      setRewards(updatedRewards);
+    } catch (error) {
+      console.error('Error deleting reward:', error);
+    }
+  };
+
   return (
     <Context.Provider
       value={{
@@ -161,6 +192,9 @@ const ContextProvider = ({ children }) => {
         isExploding,
         setIsExploding: handleSetExploding,
         totalChallenges,
+        rewards,
+        addReward: handleAddReward,
+        deleteReward: handleDeleteReward,
       }}
     >
       {children}

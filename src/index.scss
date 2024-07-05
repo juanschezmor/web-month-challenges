@@ -380,3 +380,35 @@
 .header-challenges {
   font-weight: bold;
 }
+.edit-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+.rewards-modal-content {
+  width: 500px;
+  height: 500px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+.rewards-modal-body {
+  gap: 20px;
+}
+.rewards-modal-body p {
+  margin-top: 10px;
+}
+.form-reward {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.rewards-tab {
+  text-decoration: none;
+  color: black;
+}

@@ -130,3 +130,32 @@ export const updatePointsInFirestore = async (points) => {
     throw error;
   }
 };
+
+/* REWARDS */
+
+export const fetchRewards = async () => {
+  const rewardsCollection = collection(db, 'rewards');
+  const rewardsSnapshot = await getDocs(rewardsCollection);
+  return rewardsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+};
+
+export const addReward = async (rewardData) => {
+  try {
+    const docRef = await addDoc(collection(db, 'rewards'), rewardData);
+    console.log('Document written with ID: ', docRef.id);
+    return docRef.id;
+  } catch (error) {
+    console.error('Error adding document: ', error);
+    throw error;
+  }
+};
+
+export const deleteReward = async (rewardId) => {
+  try {
+    await deleteDoc(doc(db, 'rewards', rewardId));
+    console.log('Document deleted successfully');
+  } catch (error) {
+    console.error('Error deleting document:', error);
+    throw error;
+  }
+};
