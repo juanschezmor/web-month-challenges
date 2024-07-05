@@ -4,7 +4,7 @@ import beeCard from '../utils/BeeCard';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playSound, stopSound } from '../utils/sound';
 import { useGlobalContext } from '../context/Context';
-
+import cardSound from '../assets/card-sound.mp3';
 function Card({ challenge, i }) {
   const { updateChallengeOpened, points, setPoints, setIsExploding } = useGlobalContext();
   const [modalOpened, setModalOpened] = useState(false);
@@ -31,7 +31,7 @@ function Card({ challenge, i }) {
   };
 
   const handleHoverStart = () => {
-    playSound('../../public/card-sound.mp3');
+    playSound(cardSound);
   };
 
   const handleHoverStop = () => {

@@ -8,6 +8,8 @@ import chestIcon from '../assets/chest.png';
 import chestOpenedIcon from '../assets/chest-opened.png';
 import RewardsModal from './RewardsModal';
 import { playSound } from '../utils/sound';
+import chestOpenedSound from '../assets/chest-open.mp3';
+import chestClosedSound from '../assets/chest-close.mp3';
 function Header() {
   const navigate = useNavigate();
 
@@ -31,11 +33,11 @@ function Header() {
   };
   const handleOpenRewards = () => {
     console.log('Opening points modal');
-    playSound('../../public/chest-open.mp3');
+    playSound(chestOpenedSound);
     setRewardsModalOpened(true);
   };
   const handleCloseRewards = () => {
-    playSound('../../public/chest-close.mp3');
+    playSound(chestClosedSound);
     setRewardsModalOpened(false);
   };
 
