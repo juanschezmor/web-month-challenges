@@ -3,31 +3,9 @@ import { motion } from 'framer-motion';
 import beeIcon from '../utils/BeeIcon';
 import { useGlobalContext } from '../context/Context';
 import ConfettiExplosion from 'react-confetti-explosion';
+import { dropIn } from '../utils/ModalDropIn.js';
 
 const CardModal = ({ closeModal, challenge }) => {
-  const dropIn = {
-    hidden: {
-      y: '-100vh',
-      opacity: 0,
-    },
-    visible: {
-      y: '0',
-      opacity: 1,
-      transition: {
-        duration: 2, // Duración ajustada para la animación del modal
-        type: 'spring',
-        damping: 25,
-        stiffness: 500,
-      },
-    },
-    exit: {
-      y: '100vh',
-      opacity: 0,
-      transition: {
-        duration: 2,
-      },
-    },
-  };
   const { points, setPoints, updateChallengeCompleted, isExploding, setIsExploding } = useGlobalContext();
   const textRef = useRef(null);
 
