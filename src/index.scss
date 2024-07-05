@@ -311,12 +311,15 @@
   border-radius: 5%;
   padding: 5px;
   margin-bottom: 15px;
+  white-space: pre;
 }
 .modal-challenge p {
-  font-size: 20px;
+  white-space: pre;
+  font-size: 1em;
   font-weight: bold;
   text-align: center;
 }
+
 .modal-free-point {
   background-color: white;
   margin: 10px;

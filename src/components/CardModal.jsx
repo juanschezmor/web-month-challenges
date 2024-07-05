@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import beeIcon from '../utils/BeeIcon';
 import { useGlobalContext } from '../context/Context';
+import fitty from 'fitty';
 import ConfettiExplosion from 'react-confetti-explosion';
 
 const CardModal = ({ closeModal, challenge }) => {
@@ -29,8 +30,27 @@ const CardModal = ({ closeModal, challenge }) => {
     },
   };
   const { points, setPoints, updateChallengeCompleted, isExploding, setIsExploding } = useGlobalContext();
+  const textRef = useRef(null);
 
   const isFreePoint = challenge.type === 'free-points';
+
+  const adjustFontSize = () => {
+    const element = textRef.current;
+    if (!element) return;
+
+    const parent = element.parentElement;
+    let fontSize = 20;
+
+    while (element.scrollHeight > parent.clientHeight || element.scrollWidth > parent.clientWidth) {
+      fontSize -= 1;
+      element.style.fontSize = `${fontSize}px`;
+      if (fontSize <= 10) break; // Limit font size to a minimum value
+    }
+  };
+
+  useEffect(() => {
+    adjustFontSize();
+  }, [challenge]);
 
   const handleSuccess = () => {
     if (challenge.completed === 1) return;
@@ -60,7 +80,7 @@ const CardModal = ({ closeModal, challenge }) => {
         exit="exit"
       >
         <div className="d-flex justify-content-end">
-          <button type="button" className="geneic-button btn-close" aria-label="Close" onClick={closeModal} />
+          <button type="button" className="generic-button btn-close" aria-label="Close" onClick={closeModal} />
         </div>
         <div className="h-50 d-flex justify-content-center">
           <img className="image-modal" src={beeIcon(challenge.type, challenge.completed)} alt="bee icon" />{' '}
@@ -69,7 +89,7 @@ const CardModal = ({ closeModal, challenge }) => {
         {!isFreePoint ? (
           <>
             <div className="h-100 modal-challenge">
-              <p>{challenge.challenge}</p>
+              <p ref={textRef}>{challenge.challenge}</p>
             </div>
             <div className="w-100 d-flex justify-content-between">
               <button className="w-25 generic-button" onClick={handleSuccess}>
