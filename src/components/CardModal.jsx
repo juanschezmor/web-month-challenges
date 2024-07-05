@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import beeIcon from '../utils/BeeIcon';
 import { useGlobalContext } from '../context/Context';
-import fitty from 'fitty';
 import ConfettiExplosion from 'react-confetti-explosion';
 
 const CardModal = ({ closeModal, challenge }) => {
