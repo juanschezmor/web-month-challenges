@@ -145,6 +145,7 @@
   background-color: black;
   padding: 0 20px;
 }
+
 .credit-footer p {
   margin: 0;
 }
@@ -157,7 +158,9 @@
   color: white;
 }
 .generic-button {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   background-color: #f7d51d;
   color: #333;
   font-size: 16px;
@@ -188,6 +191,7 @@
   width: 100%;
   height: auto;
   padding: 20px;
+  margin-top: 40px;
 }
 .closed-challenge-card,
 .opened-challenge-card,
@@ -324,12 +328,15 @@
   padding: 5px;
   margin-bottom: 15px;
   white-space: pre;
+  display: flex;
+  justify-content: center;
 }
 .modal-challenge p {
   white-space: pre;
-  font-size: 1em;
   font-weight: bold;
   text-align: center;
+  height: auto;
+  margin: 0;
 }
 
 .modal-free-point {

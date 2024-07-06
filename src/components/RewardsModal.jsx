@@ -43,7 +43,7 @@ const RewardsModal = ({ closeModal }) => {
       <motion.div className="rewards-modal-content" variants={dropIn} initial="hidden" animate="visible" exit="exit">
         <button type="button" className="btn-close" aria-label="Close" onClick={closeModal} />
         <div className="rewards-modal-body">
-          <div className="tabs d-flex justify-content-center align-items-center mb-3">
+          <div className="w-100 tabs d-flex justify-content-end align-items-center mb-3">
             <a className="generic-button" onClick={switchTab}>
               {tab === 'showRewards' ? 'Add Reward' : 'Show Rewards'}
             </a>

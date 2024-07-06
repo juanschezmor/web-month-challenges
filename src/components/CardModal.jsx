@@ -16,7 +16,7 @@ const CardModal = ({ closeModal, challenge }) => {
     if (!element) return;
 
     const parent = element.parentElement;
-    let fontSize = 20;
+    let fontSize = 30;
 
     while (element.scrollHeight > parent.clientHeight || element.scrollWidth > parent.clientWidth) {
       fontSize -= 1;
@@ -26,6 +26,7 @@ const CardModal = ({ closeModal, challenge }) => {
   };
 
   useEffect(() => {
+    console.log('Cambio en el challenge', challenge);
     adjustFontSize();
   }, [challenge]);
 
@@ -57,7 +58,7 @@ const CardModal = ({ closeModal, challenge }) => {
         exit="exit"
       >
         <div className="d-flex justify-content-end">
-          <button type="button" className="generic-button btn-close" aria-label="Close" onClick={closeModal} />
+          <button type="button" className="btn btn-close" aria-label="Close" onClick={closeModal} />
         </div>
         <div className="h-50 d-flex justify-content-center">
           <img className="image-modal" src={beeIcon(challenge.type, challenge.completed)} alt="bee icon" />{' '}
@@ -66,7 +67,9 @@ const CardModal = ({ closeModal, challenge }) => {
         {!isFreePoint ? (
           <>
             <div className="h-100 modal-challenge">
-              <p ref={textRef}>{challenge.challenge}</p>
+              <p ref={textRef} style={{ fontSize: '30px' }}>
+                {challenge.challenge}
+              </p>
             </div>
             <div className="w-100 d-flex justify-content-between">
               <button className="w-25 generic-button" onClick={handleSuccess}>
