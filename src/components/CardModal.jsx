@@ -85,7 +85,7 @@ const CardModal = ({ closeModal, challenge }) => {
           </>
         ) : (
           <div className="modal-free-point">
-            <p>FREE POINT!</p>
+            <p>{challenge.challenge}</p>
           </div>
         )}
       </motion.div>
