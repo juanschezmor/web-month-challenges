@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useGlobalContext } from '../context/Context';
+import React from 'react';
 import AddChallengeBox from '../components/AddChallengeBox';
 import AllChallengesBox from '../components/AllChallengesBox';
 

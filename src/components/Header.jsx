@@ -10,8 +10,10 @@ import RewardsModal from './RewardsModal';
 import { playSound } from '../utils/sound';
 import chestOpenedSound from '../assets/chest-open.mp3';
 import chestClosedSound from '../assets/chest-close.mp3';
+
 function Header() {
   const navigate = useNavigate();
+  const { loggedIn } = useGlobalContext();
 
   const [isPointsModalOpen, setIsPointsModalOpen] = useState(false);
   const [rewardsModalOpened, setRewardsModalOpened] = useState();
@@ -31,11 +33,12 @@ function Header() {
   const handleStartMonth = () => {
     openPointsModal();
   };
+
   const handleOpenRewards = () => {
-    console.log('Opening points modal');
     playSound(chestOpenedSound);
     setRewardsModalOpened(true);
   };
+
   const handleCloseRewards = () => {
     playSound(chestClosedSound);
     setRewardsModalOpened(false);
@@ -43,21 +46,25 @@ function Header() {
 
   return (
     <nav className="navbar navbar-light bg-light d-flex justify-content-between px-3">
-      <span className="header-logo" onClick={() => navigateTo('/')}>
+      <span className="header-logo" onClick={() => navigateTo('/home')}>
         <img className="hive-logo" src={hiveLogo} alt="Hive Logo" />
         <p>Hive</p>
       </span>
-      <a className="generic-button" onClick={handleStartMonth}>
-        Start Month
-      </a>
-      <ProgressBar />
-      <a onClick={handleOpenRewards}>
-        <img className="rewards-icon" src={rewardsModalOpened ? chestOpenedIcon : chestIcon} alt="" />
-      </a>
 
-      <button className="generic-button" onClick={() => navigateTo('challenges')}>
-        Challenges
-      </button>
+      {loggedIn && (
+        <>
+          <a className="generic-button" onClick={handleStartMonth}>
+            Start Month
+          </a>
+          <ProgressBar />
+          <a onClick={handleOpenRewards}>
+            <img className="rewards-icon" src={rewardsModalOpened ? chestOpenedIcon : chestIcon} alt="" />
+          </a>
+          <button className="generic-button" onClick={() => navigateTo('challenges')}>
+            Challenges
+          </button>
+        </>
+      )}
 
       {isPointsModalOpen && <PointsModal closeModal={closePointsModal} type="setMaxPoints" />}
       {rewardsModalOpened && <RewardsModal closeModal={handleCloseRewards} type="rewards" />}
