@@ -43,7 +43,7 @@ const LoginPage = () => {
             {error && <div className="text-danger mb-3">{error}</div>}
             <div className="d-grid">
               <button type="submit" className="generic-button">
-                Ingresar
+                Enter
               </button>
             </div>
           </form>
