@@ -30,6 +30,7 @@ const ContextProvider = ({ children }) => {
   const [isExploding, setIsExploding] = useState(false);
   const [totalChallenges, setTotalChallenges] = useState(0);
   const [rewards, setRewards] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
   /* FETCH DATA */
   const fetchData = async () => {
     setLoading(true);
@@ -195,6 +196,8 @@ const ContextProvider = ({ children }) => {
         rewards,
         addReward: handleAddReward,
         deleteReward: handleDeleteReward,
+        loggedIn,
+        setLoggedIn,
       }}
     >
       {children}

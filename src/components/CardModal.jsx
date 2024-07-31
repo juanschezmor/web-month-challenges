@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import beeIcon from '../utils/BeeIcon';
 import { useGlobalContext } from '../context/Context';
-import ConfettiExplosion from 'react-confetti-explosion';
 import { dropIn } from '../utils/ModalDropIn.js';
 
 const CardModal = ({ closeModal, challenge }) => {
