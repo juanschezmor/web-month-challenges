@@ -40,6 +40,7 @@ dist-ssr
 *.sw?
 
 .env
+.env.test
 .eslintcache
 
 src/Firebase/FirebaseConfig.js
