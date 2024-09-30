@@ -3,6 +3,8 @@ import Card from './Card';
 import { useGlobalContext } from '../context/Context';
 import { AnimatePresence, motion } from 'framer-motion';
 import ConfettiExplosion from 'react-confetti-explosion';
+import { playSound } from '../utils/sound';
+import completedSound from '../assets/completedSound.mp3';
 
 function CardGallery() {
   const { shownChallenges, loading, isExploding, setIsExploding } = useGlobalContext();
@@ -14,6 +16,13 @@ function CardGallery() {
       setSortedChallenges(sorted);
     }
   }, [shownChallenges]);
+
+  //Play sound when challenge is completed
+  useEffect(() => {
+    if (isExploding) {
+      playSound(completedSound);
+    }
+  }, [isExploding]);
 
   if (loading) {
     return <p className="text">Loading...</p>;

@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import PrivateRoute from './pages/PrivateRoute';
 
 function App() {
+  console.log('Modo actual:', import.meta.env.MODE);
   return (
     <BrowserRouter>
       <Header />
