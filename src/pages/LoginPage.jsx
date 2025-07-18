@@ -7,9 +7,10 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { setLoggedIn } = useGlobalContext();
-  const correctPin = import.meta.env.VITE_PIN_CODE;
+  // Pin code
+  const correctPin = import.meta.env.VITE_PIN_CODE ;
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e) => {s
     setPin(e.target.value);
   };
 
